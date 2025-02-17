@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .servicenow-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .servicenow-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .servicenow-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            height: 100px;
+        }
+        .servicenow-button {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .servicenow-button:hover {
+            background: #764ba2;
+        }
+        .servicenow-data {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        .servicenow-data ul {
+            list-style: none;
+            padding: 0;
+        }
+        .servicenow-data li {
+            background: white;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="servicenow-container">
+        <header class="servicenow-header">
+            <h2><i class="fas fa-database"></i> Data Collection Portal</h2>
+        </header>
+        <main class="servicenow-main">
+            <form id="dataForm" class="servicenow-form">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Name:</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Message:</label>
+                    <textarea id="message" placeholder="Type your message" required></textarea>
+                </div>
+                <button type="submit" class="servicenow-button"><i class="fas fa-paper-plane"></i> Submit</button>
+            </form>
+        </main>
+        <section class="servicenow-data">
+            <h3><i class="fas fa-list"></i> Collected Data</h3>
+            <ul id="dataList"></ul>
+        </section>
+    </div>
+    <script>
+        document.getElementById("dataForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+            const dataList = document.getElementById("dataList");
+            const listItem = document.createElement("li");
+            listItem.textContent = `Name: ${name}, Email: ${email}, Message: ${message}`;
+            dataList.appendChild(listItem);
+            document.getElementById("dataForm").reset();
+        });
+    </script>
+</body>
+</html>
