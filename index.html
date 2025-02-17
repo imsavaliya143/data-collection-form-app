@@ -109,17 +109,31 @@
         </section>
     </div>
     <script>
-        document.getElementById("dataForm").addEventListener("submit", function(event) {
+        document.getElementById("dataForm").addEventListener("submit", async function(event) {
             event.preventDefault();
+            
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
             const message = document.getElementById("message").value;
-            const dataList = document.getElementById("dataList");
-            const listItem = document.createElement("li");
-            listItem.textContent = `Name: ${name}, Email: ${email}, Message: ${message}`;
-            dataList.appendChild(listItem);
-            document.getElementById("dataForm").reset();
+            
+            const formData = { name, email, message };
+            const scriptURL = "https://script.google.com/macros/s/AKfycbzKCRXnpxWkGAyJX1njUCWPH2NphCTLn4b4thUAau0ngCbrseyJaOHOdiv7ji28DTsV/exec";
+    
+            try {
+                let response = await fetch(scriptURL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                });
+    
+                let result = await response.text();
+                alert(result);
+    
+                document.getElementById("dataForm").reset();
+            } catch (error) {
+                console.error("Error!", error);
+            }
         });
-    </script>
+    </script>    
 </body>
 </html>
